@@ -32,5 +32,7 @@ export function register(credentials) {
 
     dispatch(setToken(results.data.token));
     dispatch(setCurrentUser(results.data.id));
+
+    return results.data;
   };
 }

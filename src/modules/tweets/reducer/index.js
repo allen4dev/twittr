@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
+import current from './current';
+
 const reducer = combineReducers({
-  dummie: [],
+  current,
 });
 
 export default reducer;
