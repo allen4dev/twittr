@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import tweets from './tweets';
+import users from './users';
 
 const rootReducer = combineReducers({
-  [tweets.constants.NAME]: tweets.reducer,
+  [users.constants.NAME]: users.reducer,
 });
 
 export default rootReducer;

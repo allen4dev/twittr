@@ -36,3 +36,14 @@ export function register(credentials) {
     return results.data;
   };
 }
+
+export function login(credentials) {
+  return async dispatch => {
+    const { data: results } = await api.auth.login(credentials);
+
+    dispatch(setToken(results.data.token));
+    dispatch(setCurrentUser(results.data.id));
+
+    return results.data;
+  };
+}

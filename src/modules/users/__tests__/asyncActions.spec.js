@@ -20,7 +20,7 @@ describe('users module async actions', () => {
     moxios.uninstall(axiosInstance);
   });
 
-  it('create a SET_TOKEN and a SET_CURRENT_USER actions after a successful registration', async () => {
+  it('creates a SET_TOKEN and a SET_CURRENT_USER actions after a successful registration', async () => {
     const user = {
       email: 'allen@example.test',
       password: 'secret',
@@ -60,6 +60,51 @@ describe('users module async actions', () => {
 
     await store.dispatch(
       actions.register({ email: user.email, password: user.password }),
+    );
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('creates a SET_TOKEN and a SET_CURRENT_USER actions after a successful login', async () => {
+    const user = {
+      email: 'allen@example.test',
+      password: 'secret',
+      id: '1',
+    };
+
+    const token = 'xxx-xxx-xxx';
+
+    const response = {
+      data: {
+        id: user.id,
+        token,
+      },
+    };
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({
+        response,
+        status: 200,
+      });
+    });
+
+    const store = mockStore(INITIAL_STATE);
+
+    const expectedActions = [
+      {
+        type: actionTypes.SET_TOKEN,
+        payload: { token },
+      },
+      {
+        type: actionTypes.SET_CURRENT_USER,
+        payload: { id: user.id },
+      },
+    ];
+
+    await store.dispatch(
+      actions.login({ email: user.email, password: user.password }),
     );
 
     expect(store.getActions()).toEqual(expectedActions);
