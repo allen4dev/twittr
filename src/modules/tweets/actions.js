@@ -1,8 +1,9 @@
 import * as actionTypes from './actionTypes';
 
-export function type() {
+// Action creators
+export function addUsers(users) {
   return {
-    type: actionTypes.TYPE,
-    payload: { a: 'hey' },
+    type: actionTypes.ADD_USERS,
+    payload: { users },
   };
 }

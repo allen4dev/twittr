@@ -1,3 +1,6 @@
 export const INITIAL_STATE = {
-  dummie: [],
+  current: {
+    id: null,
+    token: null,
+  },
 };

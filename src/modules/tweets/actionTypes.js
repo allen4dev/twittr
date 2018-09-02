@@ -1,3 +1,3 @@
 import { NAME } from './constants';
 
-export const TYPE = `${NAME}/TYPE`;
+export const ADD_USERS = `${NAME}/ADD_USERS`;
