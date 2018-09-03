@@ -2,6 +2,7 @@ import { INITIAL_STATE } from '../model';
 import * as actions from '../actions';
 import reducer from '../reducer';
 import currentReducer from '../reducer/current';
+import tweetsReducer from '../reducer/tweets';
 
 describe('users module', () => {
   test('@INIT', () => {
@@ -33,6 +34,38 @@ describe('users module', () => {
       expect(nextState).toEqual({
         ...CURRENT_STATE,
         id,
+      });
+    });
+  });
+
+  describe('tweets', () => {
+    const TWEETS_STATE = INITIAL_STATE.tweets;
+
+    it('should handle ADD_TWEETS action', () => {
+      const uid1 = '1';
+      const user1Tweet = ['1'];
+
+      const nextState = tweetsReducer(
+        TWEETS_STATE,
+        actions.addTweets(uid1, user1Tweet),
+      );
+
+      expect(nextState).toEqual({
+        ...nextState,
+        [uid1]: user1Tweet,
+      });
+
+      const uid2 = '2';
+      const user2Tweets = ['2', '3'];
+
+      const newState = tweetsReducer(
+        nextState,
+        actions.addTweets(uid2, user2Tweets),
+      );
+
+      expect(newState).toEqual({
+        ...nextState,
+        [uid2]: user2Tweets,
       });
     });
   });

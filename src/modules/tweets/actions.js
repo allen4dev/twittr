@@ -20,7 +20,7 @@ export function createTweet(id, details) {
     const { data: results } = await api.tweets.createTweet({ details, token });
 
     const tweet = normalizeResponse(results);
-    console.log(tweet);
+
     dispatch(addTweets(tweet));
     dispatch(usersModule.actions.addTweets(id, Object.keys(tweet)));
   };

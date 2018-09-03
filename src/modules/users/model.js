@@ -5,3 +5,10 @@ export const INITIAL_STATE = {
   },
   tweets: {},
 };
+
+export function addUserTweets(state, action) {
+  const { id, tweets } = action.payload;
+  const userTweets = state[id] || [];
+
+  return [...userTweets, ...tweets];
+}

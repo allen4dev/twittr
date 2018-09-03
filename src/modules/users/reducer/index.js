@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 
 import current from './current';
+import tweets from './tweets';
 
 const reducer = combineReducers({
   current,
-  tweets: () => ({}),
+  tweets,
 });
 
 export default reducer;
