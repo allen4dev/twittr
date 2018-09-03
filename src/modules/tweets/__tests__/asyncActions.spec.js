@@ -12,7 +12,7 @@ import { normalizeResponse } from 'utils/helpers';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('users module async actions', () => {
+describe('users module', () => {
   beforeEach(function() {
     moxios.install(axiosInstance);
   });
