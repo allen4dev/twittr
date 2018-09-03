@@ -3,4 +3,5 @@ export const INITIAL_STATE = {
     id: null,
     token: null,
   },
+  tweets: {},
 };

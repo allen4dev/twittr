@@ -24,6 +24,13 @@ export function addUsers(users) {
   };
 }
 
+export function addTweets(id, tweets) {
+  return {
+    type: actionTypes.ADD_TWEETS,
+    payload: { id, tweets },
+  };
+}
+
 // Async actions
 
 export function register(credentials) {

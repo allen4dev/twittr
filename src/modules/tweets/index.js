@@ -4,4 +4,4 @@ import * as actions from './actions';
 import * as model from './model';
 import reducer from './reducer';
 
-export { constants, actionTypes, actions, model, reducer };
+export default { constants, actionTypes, actions, model, reducer };
