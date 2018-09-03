@@ -14,4 +14,14 @@ export default {
       return response;
     },
   },
+
+  tweets: {
+    async createTweet({ details, token }) {
+      const response = axiosInstance.get('tweets', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      return response;
+    },
+  },
 };
