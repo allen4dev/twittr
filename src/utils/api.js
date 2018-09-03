@@ -17,9 +17,20 @@ export default {
 
   tweets: {
     async createTweet({ details, token }) {
-      const response = axiosInstance.get('tweets', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+      const response = await axiosInstance.post('tweets', headers);
+
+      return response;
+    },
+  },
+
+  replies: {
+    async replyTweet({ details, token }) {
+      const url = `tweets/${details.tweetId}/replies`;
+      const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+      const response = await axiosInstance.post(url, headers);
 
       return response;
     },

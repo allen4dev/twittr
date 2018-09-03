@@ -21,4 +21,24 @@ describe('tweets module action creators', () => {
 
     expect(actions.addTweets(tweets)).toEqual(expectedAction);
   });
+
+  it('should create an action to add a reply or a list of replies of a tweet', () => {
+    const id = '1';
+    const replies = {
+      '1': {
+        type: 'replies',
+        id: '1',
+        attributes: {
+          body: 'Reply 1',
+        },
+      },
+    };
+
+    const expectedAction = {
+      type: actionTypes.ADD_REPLIES,
+      payload: { id, replies },
+    };
+
+    expect(actions.addReplies(id, replies)).toEqual(expectedAction);
+  });
 });

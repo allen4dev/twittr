@@ -13,6 +13,13 @@ export function addTweets(tweets) {
   };
 }
 
+export function addReplies(id, replies) {
+  return {
+    type: actionTypes.ADD_REPLIES,
+    payload: { id, replies },
+  };
+}
+
 // Async actions
 export function createTweet(id, details) {
   return async (dispatch, getState) => {

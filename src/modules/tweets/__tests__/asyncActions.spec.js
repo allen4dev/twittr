@@ -50,11 +50,11 @@ describe('tweets module', () => {
 
     const store = mockStore({
       users: {
-        ...INITIAL_STATE,
         current: {
           ...INITIAL_STATE.current,
           token: 'xxx-xxx-xxx',
         },
+        ...INITIAL_STATE,
       },
     });
 

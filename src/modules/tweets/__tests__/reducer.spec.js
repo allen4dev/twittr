@@ -4,7 +4,7 @@ import reducer from '../reducer';
 
 import entitiesReducer from '../reducer/entities';
 
-describe.only('tweets module', () => {
+describe('tweets module', () => {
   test('@INIT', () => {
     expect(reducer(undefined, {})).toEqual(INITIAL_STATE);
   });
