@@ -1,8 +1,10 @@
 import { INITIAL_STATE } from '../model';
 import * as actions from '../actions';
+
 import reducer from '../reducer';
 import currentReducer from '../reducer/current';
 import tweetsReducer from '../reducer/tweets';
+import followersReducer from '../reducer/followers';
 
 describe('users module', () => {
   test('@INIT', () => {
@@ -69,6 +71,41 @@ describe('users module', () => {
         ...nextState,
         [uid2]: {
           byId: [...user2Tweets],
+        },
+      });
+    });
+  });
+
+  describe('followers', () => {
+    const FOLLOWERS_STATE = INITIAL_STATE.followers;
+
+    it('should handle FOLLOW_USER action', () => {
+      const followerId = '1';
+      const followingId = '2';
+
+      const nextState = followersReducer(
+        FOLLOWERS_STATE,
+        actions.followUser(followerId, followingId),
+      );
+
+      expect(nextState).toEqual({
+        ...FOLLOWERS_STATE,
+        [followerId]: {
+          byId: [followingId],
+        },
+      });
+
+      const newUser = '3';
+
+      const newState = followersReducer(
+        nextState,
+        actions.followUser(followerId, newUser),
+      );
+
+      expect(newState).toEqual({
+        ...nextState,
+        [followerId]: {
+          byId: [followingId, newUser],
         },
       });
     });
