@@ -20,6 +20,13 @@ export function addReplies(id, replies) {
   };
 }
 
+export function favoriteTweet(id) {
+  return {
+    type: actionTypes.FAVORITE_TWEET,
+    payload: { id },
+  };
+}
+
 // Async actions
 export function createTweet(id, details) {
   return async (dispatch, getState) => {
