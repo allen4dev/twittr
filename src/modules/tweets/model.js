@@ -1,6 +1,7 @@
 export const INITIAL_STATE = {
   entities: {},
   replies: {},
+  favorited: {},
 };
 
 export function addTweetReplies(state, action) {
@@ -9,4 +10,11 @@ export function addTweetReplies(state, action) {
   const tweetReplies = state[id] ? state[id].byId : [];
 
   return [...tweetReplies, ...replies];
+}
+
+export function addFavoritedTweet(state, action) {
+  const { userId, tweetId } = action.payload;
+  const favorited = state[tweetId] ? state[userId] : [];
+
+  return [...favorited, userId];
 }

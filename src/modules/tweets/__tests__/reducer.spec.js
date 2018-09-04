@@ -4,6 +4,7 @@ import reducer from '../reducer';
 
 import entitiesReducer from '../reducer/entities';
 import repliesReducer from '../reducer/replies';
+import favoritedReducer from '../reducer/favorited';
 
 describe('tweets module', () => {
   test('@INIT', () => {
@@ -94,6 +95,38 @@ describe('tweets module', () => {
         [tweetId]: {
           byId: [...replies, ...newReplies],
         },
+      });
+    });
+  });
+
+  describe('favorited', () => {
+    const FAVORITED_STATE = INITIAL_STATE.favorited;
+
+    it('should handle FAVORITE_TWEET action', () => {
+      const uid = '1';
+      const tweetId = '1';
+
+      const nextState = favoritedReducer(
+        FAVORITED_STATE,
+        actions.favoriteTweet(uid, tweetId),
+      );
+
+      expect(nextState).toEqual({
+        ...FAVORITED_STATE,
+        [tweetId]: [uid],
+      });
+
+      const uid2 = '2';
+      const tweetId2 = '2';
+
+      const newState = favoritedReducer(
+        nextState,
+        actions.favoriteTweet(uid2, tweetId2),
+      );
+
+      expect(newState).toEqual({
+        ...nextState,
+        [tweetId2]: [uid2],
       });
     });
   });
