@@ -42,14 +42,15 @@ describe('tweets module action creators', () => {
     expect(actions.addReplies(id, replies)).toEqual(expectedAction);
   });
 
-  it('should create an action to favorite a tweet', () => {
-    const id = '1';
+  it('should create an action with all the required data to favorite a tweet', () => {
+    const userId = '1';
+    const tweetId = '1';
 
     const expectedAction = {
       type: actionTypes.FAVORITE_TWEET,
-      payload: { id },
+      payload: { userId, tweetId },
     };
 
-    expect(actions.favoriteTweet(id)).toEqual(expectedAction);
+    expect(actions.favoriteTweet(userId, tweetId)).toEqual(expectedAction);
   });
 });

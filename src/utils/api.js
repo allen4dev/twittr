@@ -23,6 +23,15 @@ export default {
 
       return response;
     },
+
+    async favorite({ id, token }) {
+      const url = `tweets/${id}/favorite`;
+      const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+      const response = await axiosInstance.post(url, headers);
+
+      return response;
+    },
   },
 
   replies: {

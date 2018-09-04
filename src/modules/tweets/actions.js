@@ -20,10 +20,10 @@ export function addReplies(id, replies) {
   };
 }
 
-export function favoriteTweet(id) {
+export function favoriteTweet(userId, tweetId) {
   return {
     type: actionTypes.FAVORITE_TWEET,
-    payload: { id },
+    payload: { userId, tweetId },
   };
 }
 
@@ -37,5 +37,15 @@ export function createTweet(id, details) {
 
     dispatch(addTweets(tweet));
     dispatch(usersModule.actions.addTweets(id, Object.keys(tweet)));
+  };
+}
+
+export function favorite(userId, tweetId) {
+  return async (dispatch, getState) => {
+    const { token } = getState().users.current;
+
+    const { data: results } = await api.tweets.favorite({ id: tweetId, token });
+
+    dispatch(favoriteTweet(userId, tweetId));
   };
 }
