@@ -44,7 +44,7 @@ export function favorite(userId, tweetId) {
   return async (dispatch, getState) => {
     const { token } = getState().users.current;
 
-    const { data: results } = await api.tweets.favorite({ id: tweetId, token });
+    await api.tweets.favorite({ id: tweetId, token });
 
     dispatch(favoriteTweet(userId, tweetId));
   };

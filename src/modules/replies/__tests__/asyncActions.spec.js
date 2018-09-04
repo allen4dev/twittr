@@ -73,4 +73,46 @@ describe('replies module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  it('creates FAVORITE_REPLY after a replyTweet async action', async () => {
+    const userId = '1';
+    const replyId = '1';
+
+    const response = {
+      data: {
+        type: 'replies',
+        id: replyId,
+        // more fields
+      },
+    };
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({
+        response,
+        status: 200,
+      });
+    });
+
+    const store = mockStore({
+      users: {
+        current: {
+          token: 'xxx-xxx-xxx',
+        },
+      },
+      ...INITIAL_STATE,
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.FAVORITE_REPLY,
+        payload: { userId, replyId },
+      },
+    ];
+
+    await store.dispatch(actions.favorite(userId, replyId));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
 });

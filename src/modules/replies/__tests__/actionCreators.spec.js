@@ -19,3 +19,15 @@ it('should create an action to add a reply or a list of replies', () => {
 
   expect(actions.addReplies(replies)).toEqual(expectedAction);
 });
+
+it('should create an action to favorite a reply', () => {
+  const userId = '1';
+  const replyId = '1';
+
+  const expectedAction = {
+    type: actionTypes.FAVORITE_REPLY,
+    payload: { userId, replyId }
+  }
+
+  expect(actions.favoriteReply(userId, replyId)).toEqual(expectedAction)
+})

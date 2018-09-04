@@ -14,7 +14,7 @@ export function addTweetReplies(state, action) {
 
 export function addFavoritedTweet(state, action) {
   const { userId, tweetId } = action.payload;
-  const favorited = state[tweetId] ? state[userId] : [];
+  const favorited = state[tweetId] ? state[tweetId] : [];
 
   return [...favorited, userId];
 }

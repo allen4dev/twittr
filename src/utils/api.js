@@ -43,5 +43,14 @@ export default {
 
       return response;
     },
+
+    async favorite({ id, token }) {
+      const url = `replies/${id}/favorite`;
+      const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+      const response = await axiosInstance.post(url, headers);
+
+      return response;
+    },
   },
 };

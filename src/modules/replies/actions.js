@@ -14,6 +14,13 @@ export function addReplies(replies) {
   };
 }
 
+export function favoriteReply(userId, replyId) {
+  return {
+    type: actionTypes.FAVORITE_REPLY,
+    payload: { userId, replyId },
+  };
+}
+
 // Async actions
 
 export function replyTweet(details) {
@@ -28,5 +35,15 @@ export function replyTweet(details) {
     dispatch(
       tweetsModule.actions.addReplies(details.tweetId, Object.keys(normalized)),
     );
+  };
+}
+
+export function favorite(userId, replyId) {
+  return async (dispatch, getState) => {
+    const { token } = getState().users.current;
+
+    await api.replies.favorite({ id: replyId, token });
+
+    dispatch(favoriteReply(userId, replyId));
   };
 }
