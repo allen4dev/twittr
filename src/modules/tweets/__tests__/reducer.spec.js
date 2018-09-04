@@ -3,6 +3,7 @@ import * as actions from '../actions';
 import reducer from '../reducer';
 
 import entitiesReducer from '../reducer/entities';
+import repliesReducer from '../reducer/replies';
 
 describe('tweets module', () => {
   test('@INIT', () => {
@@ -58,6 +59,41 @@ describe('tweets module', () => {
       expect(newState).toEqual({
         ...nextState,
         ...newTweets,
+      });
+    });
+  });
+
+  describe('replies', () => {
+    const REPLIES_STATE = INITIAL_STATE.tweets;
+
+    it('should handle ADD_REPLIES action', () => {
+      const tweetId = '1';
+      const replies = ['1'];
+
+      const nextState = repliesReducer(
+        REPLIES_STATE,
+        actions.addReplies(tweetId, replies),
+      );
+
+      expect(nextState).toEqual({
+        ...REPLIES_STATE,
+        [tweetId]: {
+          byId: [...replies],
+        },
+      });
+
+      const newReplies = ['2', '3'];
+
+      const newState = repliesReducer(
+        nextState,
+        actions.addReplies(tweetId, newReplies),
+      );
+
+      expect(newState).toEqual({
+        ...nextState,
+        [tweetId]: {
+          byId: [...replies, ...newReplies],
+        },
       });
     });
   });
