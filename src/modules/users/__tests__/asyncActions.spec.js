@@ -109,4 +109,42 @@ describe('users module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  it('creates a FOLLOW_USER action after a follow async action', async () => {
+    const followerId = '1';
+    const followingId = '2';
+
+    const response = {
+      data: {
+        type: 'users',
+        id: followingId,
+        // more fields
+      },
+    };
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({
+        response,
+        status: 200,
+      });
+    });
+
+    const store = mockStore({
+      users: { current: { token: 'xxx-xxx-xxx' } },
+      ...INITIAL_STATE,
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.FOLLOW_USER,
+        payload: { followerId, followingId },
+      },
+    ];
+
+    await store.dispatch(actions.follow({ followerId, followingId }));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
 });

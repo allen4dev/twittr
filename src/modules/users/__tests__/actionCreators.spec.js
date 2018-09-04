@@ -57,4 +57,16 @@ describe('users module action creators', () => {
 
     expect(actions.addTweets(id, tweetIds)).toEqual(expectedAction);
   });
+
+  it('should create an action to follow a user', () => {
+    const followerId = '1';
+    const followingId = '2';
+
+    const expectedAction = {
+      type: actionTypes.FOLLOW_USER,
+      payload: { followerId, followingId },
+    };
+
+    expect(actions.followUser(followerId, followingId)).toEqual(expectedAction);
+  });
 });

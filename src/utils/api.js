@@ -15,11 +15,26 @@ export default {
     },
   },
 
+  users: {
+    async follow(id, token) {
+      const headers = { headers: { Authorization: `Bearer ${token}` } };
+      const url = `users/${id}/follow`;
+
+      const response = await axiosInstance.post(url, headers);
+
+      return response;
+    },
+  },
+
   tweets: {
     async createTweet({ details, token }) {
       const headers = { headers: { Authorization: `Bearer ${token}` } };
 
-      const response = await axiosInstance.post('tweets', headers);
+      const response = await axiosInstance.post(
+        'tweets',
+        details.body,
+        headers,
+      );
 
       return response;
     },

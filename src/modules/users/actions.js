@@ -31,6 +31,13 @@ export function addTweets(id, tweets) {
   };
 }
 
+export function followUser(followerId, followingId) {
+  return {
+    type: actionTypes.FOLLOW_USER,
+    payload: { followerId, followingId },
+  };
+}
+
 // Async actions
 
 export function register(credentials) {
@@ -52,5 +59,15 @@ export function login(credentials) {
     dispatch(setCurrentUser(results.data.id));
 
     return results.data;
+  };
+}
+
+export function follow({ followerId, followingId }) {
+  return async (dispatch, getState) => {
+    const { token } = getState().users.current;
+
+    await api.users.follow(followingId, token);
+
+    dispatch(followUser(followerId, followingId));
   };
 }
