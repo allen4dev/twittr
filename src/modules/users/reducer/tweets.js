@@ -5,7 +5,9 @@ function tweetsReducer(state = INITIAL_STATE.tweets, action) {
   if (action.type === actionTypes.ADD_TWEETS) {
     return {
       ...state,
-      [action.payload.id]: addUserTweets(state, action),
+      [action.payload.id]: {
+        byId: addUserTweets(state, action),
+      },
     };
   }
 

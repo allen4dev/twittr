@@ -52,7 +52,9 @@ describe('users module', () => {
 
       expect(nextState).toEqual({
         ...nextState,
-        [uid1]: user1Tweet,
+        [uid1]: {
+          byId: user1Tweet,
+        },
       });
 
       const uid2 = '2';
@@ -65,7 +67,9 @@ describe('users module', () => {
 
       expect(newState).toEqual({
         ...nextState,
-        [uid2]: user2Tweets,
+        [uid2]: {
+          byId: [...user2Tweets],
+        },
       });
     });
   });

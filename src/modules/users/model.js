@@ -8,7 +8,8 @@ export const INITIAL_STATE = {
 
 export function addUserTweets(state, action) {
   const { id, tweets } = action.payload;
-  const userTweets = state[id] || [];
+
+  const userTweets = state[id] ? state[id].byId : [];
 
   return [...userTweets, ...tweets];
 }
