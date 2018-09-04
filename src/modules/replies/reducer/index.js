@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 const reducer = combineReducers({
-  dummie: [],
+  entities: () => ({}),
 });
 
 export default reducer;
