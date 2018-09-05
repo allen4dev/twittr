@@ -1,6 +1,8 @@
 import * as actionTypes from './../actionTypes';
 import * as actions from './../actions';
 
+import { normalizeResponse } from 'utils/helpers';
+
 describe('users module action creators', () => {
   it('should create an action to set the current user token', () => {
     const token = 'xxx-xxx-xxx';
@@ -72,7 +74,17 @@ describe('users module action creators', () => {
 
   it('should create an action to add the user timeline tweet or list of tweets', () => {
     const id = '1';
-    const tweets = ['5'];
+
+    const tweets = {
+      ' 2': {
+        type: 'tweets',
+        id: '2',
+      },
+      '3': {
+        type: 'tweets',
+        id: '3',
+      },
+    };
 
     const expectedAction = {
       type: actionTypes.ADD_TIMELINE_TWEETS,

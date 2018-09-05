@@ -1,7 +1,16 @@
 export function normalizeResponse(response) {
-  const item = response.data;
+  const { data } = response;
 
-  return {
-    [item.id]: { ...item },
-  };
+  if (!Array.isArray(response.data)) {
+    return {
+      [data.id]: { ...data },
+    };
+  }
+
+  return data.reduce((initial, value) => {
+    return {
+      ...initial,
+      [value.id]: { ...value },
+    };
+  }, {});
 }

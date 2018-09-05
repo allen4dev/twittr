@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 
 import api from 'utils/api';
+import { normalizeResponse } from 'utils/helpers';
 
 // Action creators
 export function setCurrentUser(id) {
@@ -76,5 +77,17 @@ export function follow({ followerId, followingId }) {
     await api.users.follow(followingId, token);
 
     dispatch(followUser(followerId, followingId));
+  };
+}
+
+export function fetchTimeline(id) {
+  return async (dispatch, getState) => {
+    const { token } = getState().users.current;
+
+    const { data: results } = await api.me.fetchTimeline(token);
+
+    const tweets = normalizeResponse(results);
+
+    dispatch(addTimelineTweets(id, tweets));
   };
 }

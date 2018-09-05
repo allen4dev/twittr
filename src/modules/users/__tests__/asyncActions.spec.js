@@ -8,6 +8,8 @@ import { INITIAL_STATE } from './../model';
 
 import axiosInstance from 'utils/axiosInstance';
 
+import { normalizeResponse } from 'utils/helpers';
+
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
@@ -144,6 +146,53 @@ describe('users module async actions', () => {
     ];
 
     await store.dispatch(actions.follow({ followerId, followingId }));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('creates a ADD_TIMELINE_TWEETS action after fetchTimeline async action', async () => {
+    const uid = '1';
+
+    const response = {
+      data: [
+        {
+          type: 'tweets',
+          id: '1',
+        },
+        {
+          type: 'tweets',
+          id: '2',
+        },
+      ],
+    };
+
+    const normalized = normalizeResponse(response);
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({
+        response,
+        status: 200,
+      });
+    });
+
+    const store = mockStore({
+      users: { current: { token: 'xxx-xxx-xxx' } },
+      ...INITIAL_STATE,
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ADD_TIMELINE_TWEETS,
+        payload: {
+          id: uid,
+          tweets: normalized,
+        },
+      },
+    ];
+
+    await store.dispatch(actions.fetchTimeline(uid));
 
     expect(store.getActions()).toEqual(expectedActions);
   });

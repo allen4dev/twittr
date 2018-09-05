@@ -15,6 +15,17 @@ export default {
     },
   },
 
+  me: {
+    async fetchTimeline(token) {
+      const headers = { headers: { Authorization: `Bearer ${token}` } };
+      const url = `me/timeline`;
+
+      const response = await axiosInstance.get(url, headers);
+
+      return response;
+    },
+  },
+
   users: {
     async follow(id, token) {
       const headers = { headers: { Authorization: `Bearer ${token}` } };
