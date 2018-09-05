@@ -5,6 +5,7 @@ import reducer from '../reducer';
 import currentReducer from '../reducer/current';
 import tweetsReducer from '../reducer/tweets';
 import followersReducer from '../reducer/followers';
+import followingsReducer from '../reducer/followings';
 
 describe('users module', () => {
   test('@INIT', () => {
@@ -90,22 +91,57 @@ describe('users module', () => {
 
       expect(nextState).toEqual({
         ...FOLLOWERS_STATE,
+        [followingId]: {
+          byId: [followerId],
+        },
+      });
+
+      const newUserFollowed = '3';
+
+      const newState = followersReducer(
+        nextState,
+        actions.followUser(followerId, newUserFollowed),
+      );
+
+      expect(newState).toEqual({
+        ...nextState,
+        [newUserFollowed]: {
+          byId: [followerId],
+        },
+      });
+    });
+  });
+
+  describe('followings', () => {
+    const FOLLOWINGS_STATE = INITIAL_STATE.followings;
+
+    it('should handle FOLLOW_USER action', () => {
+      const followerId = '1';
+      const followingId = '2';
+
+      const nextState = followingsReducer(
+        FOLLOWINGS_STATE,
+        actions.followUser(followerId, followingId),
+      );
+
+      expect(nextState).toEqual({
+        ...FOLLOWINGS_STATE,
         [followerId]: {
           byId: [followingId],
         },
       });
 
-      const newUser = '3';
+      const newUserFollowed = '3';
 
-      const newState = followersReducer(
+      const newState = followingsReducer(
         nextState,
-        actions.followUser(followerId, newUser),
+        actions.followUser(followerId, newUserFollowed),
       );
 
       expect(newState).toEqual({
         ...nextState,
         [followerId]: {
-          byId: [followingId, newUser],
+          byId: [followingId, newUserFollowed],
         },
       });
     });

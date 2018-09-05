@@ -6,7 +6,7 @@ function followersReducer(state = INITIAL_STATE.followers, action) {
     case actionTypes.FOLLOW_USER:
       return {
         ...state,
-        [action.payload.followerId]: {
+        [action.payload.followingId]: {
           byId: addFollower(state, action),
         },
       };

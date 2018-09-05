@@ -5,6 +5,7 @@ export const INITIAL_STATE = {
   },
   tweets: {},
   followers: {},
+  followings: {},
 };
 
 export function addUserTweets(state, action) {
@@ -18,7 +19,15 @@ export function addUserTweets(state, action) {
 export function addFollower(state, action) {
   const { followerId, followingId } = action.payload;
 
-  const followers = state[followerId] ? state[followerId].byId : [];
+  const followers = state[followingId] ? state[followingId].byId : [];
 
-  return [...followers, followingId];
+  return [...followers, followerId];
+}
+
+export function userFollowed(state, action) {
+  const { followerId, followingId } = action.payload;
+
+  const followings = state[followerId] ? state[followerId].byId : [];
+
+  return [...followings, followingId];
 }
