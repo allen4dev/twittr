@@ -5,6 +5,7 @@ import reducer from '../reducer';
 import entitiesReducer from '../reducer/entities';
 import repliesReducer from '../reducer/replies';
 import favoritedReducer from '../reducer/favorited';
+import retweetedReducer from '../reducer/retweeted';
 
 describe('tweets module', () => {
   test('@INIT', () => {
@@ -127,6 +128,37 @@ describe('tweets module', () => {
       expect(newState).toEqual({
         ...nextState,
         [tweetId2]: [uid2],
+      });
+    });
+  });
+
+  describe('retweeted', () => {
+    const RETWEETED_STATE = INITIAL_STATE.retweeted;
+
+    it('should handle RETWEET action', () => {
+      const id = '1';
+      const uid2 = '2';
+
+      const nextState = retweetedReducer(
+        RETWEETED_STATE,
+        actions.retweetTweet(id, uid2),
+      );
+
+      expect(nextState).toEqual({
+        ...RETWEETED_STATE,
+        [id]: [uid2],
+      });
+
+      const uid3 = '3';
+
+      const newState = retweetedReducer(
+        nextState,
+        actions.retweetTweet(id, uid3),
+      );
+
+      expect(newState).toEqual({
+        ...nextState,
+        [id]: [uid2, uid3],
       });
     });
   });
