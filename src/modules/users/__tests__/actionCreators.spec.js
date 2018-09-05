@@ -69,4 +69,16 @@ describe('users module action creators', () => {
 
     expect(actions.followUser(followerId, followingId)).toEqual(expectedAction);
   });
+
+  it('should create an action to add the user timeline tweet or list of tweets', () => {
+    const id = '1';
+    const tweets = ['5'];
+
+    const expectedAction = {
+      type: actionTypes.ADD_TIMELINE_TWEETS,
+      payload: { id, tweets },
+    };
+
+    expect(actions.addTimelineTweets(id, tweets)).toEqual(expectedAction);
+  });
 });

@@ -31,6 +31,13 @@ export function addTweets(id, tweets) {
   };
 }
 
+export function addTimelineTweets(id, tweets) {
+  return {
+    type: actionTypes.ADD_TIMELINE_TWEETS,
+    payload: { id, tweets },
+  };
+}
+
 export function followUser(followerId, followingId) {
   return {
     type: actionTypes.FOLLOW_USER,
