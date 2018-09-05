@@ -7,6 +7,7 @@ import * as actionTypes from '../actionTypes';
 import { INITIAL_STATE } from '../model';
 
 import axiosInstance from 'utils/axiosInstance';
+
 import { normalizeResponse } from 'utils/helpers';
 
 import usersModule from 'modules/users';
@@ -113,6 +114,45 @@ describe('tweets module', () => {
     ];
 
     await store.dispatch(actions.favorite(userId, tweetId));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('creates a RETWEET action after a retweet async action', async () => {
+    const id = '1';
+    const uid = '2';
+
+    const response = {
+      data: { id, type: 'tweets' },
+    };
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({
+        response,
+        status: 200,
+      });
+    });
+
+    const store = mockStore({
+      users: {
+        current: {
+          ...INITIAL_STATE.current,
+          token: 'xxx-xxx-xxx',
+        },
+      },
+      ...INITIAL_STATE,
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.RETWEET,
+        payload: { id, uid },
+      },
+    ];
+
+    await store.dispatch(actions.retweet({ id, uid }));
 
     expect(store.getActions()).toEqual(expectedActions);
   });

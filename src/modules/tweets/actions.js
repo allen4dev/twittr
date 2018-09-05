@@ -27,6 +27,13 @@ export function favoriteTweet(userId, tweetId) {
   };
 }
 
+export function retweetTweet(id, uid) {
+  return {
+    type: actionTypes.RETWEET,
+    payload: { id, uid },
+  };
+}
+
 // Async actions
 export function createTweet(id, details) {
   return async (dispatch, getState) => {
@@ -47,5 +54,15 @@ export function favorite(userId, tweetId) {
     await api.tweets.favorite({ id: tweetId, token });
 
     dispatch(favoriteTweet(userId, tweetId));
+  };
+}
+
+export function retweet({ id, uid }) {
+  return async (dispatch, getState) => {
+    const { token } = getState().users.current;
+
+    await api.tweets.retweet({ id, token });
+
+    dispatch(retweetTweet(id, uid));
   };
 }

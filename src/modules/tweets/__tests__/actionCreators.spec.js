@@ -53,4 +53,16 @@ describe('tweets module action creators', () => {
 
     expect(actions.favoriteTweet(userId, tweetId)).toEqual(expectedAction);
   });
+
+  it('should create an action to retweet a tweet', () => {
+    const id = '1';
+    const uid = '2';
+
+    const expectedAction = {
+      type: actionTypes.RETWEET,
+      payload: { id, uid },
+    };
+
+    expect(actions.retweetTweet(id, uid)).toEqual(expectedAction);
+  });
 });

@@ -47,6 +47,15 @@ export default {
 
       return response;
     },
+
+    async retweet({ id, token }) {
+      const url = `tweets/${id}/retweet`;
+      const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+      const response = await axiosInstance.post(url, headers);
+
+      return response;
+    },
   },
 
   replies: {
