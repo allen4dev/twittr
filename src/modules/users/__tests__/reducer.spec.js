@@ -6,6 +6,7 @@ import currentReducer from '../reducer/current';
 import tweetsReducer from '../reducer/tweets';
 import followersReducer from '../reducer/followers';
 import followingsReducer from '../reducer/followings';
+import timelineReducer from '../reducer/timeline';
 
 describe('users module', () => {
   test('@INIT', () => {
@@ -37,6 +38,43 @@ describe('users module', () => {
       expect(nextState).toEqual({
         ...CURRENT_STATE,
         id,
+      });
+    });
+
+    describe('timeline', () => {
+      const TIMELINE_STATE = CURRENT_STATE.timeline;
+
+      it('should handle ADD_TIMELINE_TWEETS action', () => {
+        const uid = '1';
+
+        const tweets = {
+          '2': { type: 'tweets', id: '2' },
+        };
+
+        const nextState = timelineReducer(
+          TIMELINE_STATE,
+          actions.addTimelineTweets(uid, tweets),
+        );
+
+        expect(nextState).toEqual({
+          ...TIMELINE_STATE,
+          tweets: Object.keys(tweets),
+        });
+
+        const newTweets = {
+          '3': { type: 'tweets', id: '3' },
+          '4': { type: 'tweets', id: '4' },
+        };
+
+        const newState = timelineReducer(
+          nextState,
+          actions.addTimelineTweets(uid, newTweets),
+        );
+
+        expect(newState).toEqual({
+          ...nextState,
+          tweets: [...nextState.tweets, ...Object.keys(newTweets)],
+        });
       });
     });
   });
