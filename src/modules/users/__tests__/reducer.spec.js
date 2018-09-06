@@ -7,6 +7,9 @@ import tweetsReducer from '../reducer/tweets';
 import followersReducer from '../reducer/followers';
 import followingsReducer from '../reducer/followings';
 import timelineReducer from '../reducer/timeline';
+import notificationsReducer from '../reducer/notifications';
+
+import notificationsModule from 'modules/notifications';
 
 describe('users module', () => {
   test('@INIT', () => {
@@ -74,6 +77,46 @@ describe('users module', () => {
         expect(newState).toEqual({
           ...nextState,
           tweets: [...nextState.tweets, ...Object.keys(newTweets)],
+        });
+      });
+    });
+
+    describe('notifications', () => {
+      const NOTIFICATIONS_STATE = CURRENT_STATE.notifications;
+
+      it('should handle notificationsModule.actionTypes.ADD_NOTIFICATIONS action', () => {
+        const uid = '10';
+        const notifications = {
+          '1': { type: 'notifications', id: '1' },
+          '2': { type: 'notifications', id: '2' },
+        };
+
+        const nextState = notificationsReducer(
+          NOTIFICATIONS_STATE,
+          notificationsModule.actions.addNotifications(uid, notifications),
+        );
+
+        expect(nextState).toEqual({
+          ...NOTIFICATIONS_STATE,
+          byId: Object.keys(notifications),
+        });
+
+        const newNotifications = {
+          '3': { type: 'notifications', id: '3' },
+          '4': { type: 'notifications', id: '4' },
+        };
+
+        const newState = notificationsReducer(
+          nextState,
+          notificationsModule.actions.addNotifications(uid, newNotifications),
+        );
+
+        expect(newState).toEqual({
+          ...nextState,
+          byId: [
+            ...Object.keys(notifications),
+            ...Object.keys(newNotifications),
+          ],
         });
       });
     });

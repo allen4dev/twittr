@@ -7,6 +7,11 @@ export const INITIAL_STATE = {
       loading: null,
       nextPage: null,
     },
+    notifications: {
+      byId: [],
+      loading: null,
+      nextPage: null,
+    },
   },
   tweets: {},
   followers: {},

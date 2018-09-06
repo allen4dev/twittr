@@ -4,6 +4,7 @@ import { INITIAL_STATE } from '../model';
 import * as actionTypes from '../actionTypes';
 
 import timelineReducer from './timeline';
+import notificationsReducer from './notifications';
 
 function idReducer(state = INITIAL_STATE.current.id, action) {
   if (action.type === actionTypes.SET_CURRENT_USER) {
@@ -25,6 +26,7 @@ const currentReducer = combineReducers({
   id: idReducer,
   token: tokenReducer,
   timeline: timelineReducer,
+  notifications: notificationsReducer,
 });
 
 export default currentReducer;
