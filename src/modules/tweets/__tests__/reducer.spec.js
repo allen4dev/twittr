@@ -7,6 +7,8 @@ import repliesReducer from '../reducer/replies';
 import favoritedReducer from '../reducer/favorited';
 import retweetedReducer from '../reducer/retweeted';
 
+import usersModule from 'modules/users';
+
 describe('tweets module', () => {
   test('@INIT', () => {
     expect(reducer(undefined, {})).toEqual(INITIAL_STATE);
@@ -57,6 +59,38 @@ describe('tweets module', () => {
       };
 
       const newState = entitiesReducer(nextState, actions.addTweets(newTweets));
+
+      expect(newState).toEqual({
+        ...nextState,
+        ...newTweets,
+      });
+    });
+
+    it('should handle usersModule.actionTypes.ADD_TIMELINE_TWEETS action', () => {
+      const uid = '1';
+      const tweets = {
+        '2': { type: 'tweets', id: '2' },
+      };
+
+      const nextState = entitiesReducer(
+        ENTITIES_STATE,
+        usersModule.actions.addTimelineTweets(uid, tweets),
+      );
+
+      expect(nextState).toEqual({
+        ...ENTITIES_STATE,
+        ...tweets,
+      });
+
+      const newTweets = {
+        '3': { type: 'tweets', id: '3' },
+        '4': { type: 'tweets', id: '4' },
+      };
+
+      const newState = entitiesReducer(
+        nextState,
+        usersModule.actions.addTimelineTweets(uid, newTweets),
+      );
 
       expect(newState).toEqual({
         ...nextState,
