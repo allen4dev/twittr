@@ -24,6 +24,15 @@ export default {
 
       return response;
     },
+
+    async notifications(token) {
+      const headers = { headers: { Authorization: `Bearer ${token}` } };
+      const url = `me/notifications`;
+
+      const response = await axiosInstance.get(url, headers);
+
+      return response;
+    },
   },
 
   users: {
