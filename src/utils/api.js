@@ -53,6 +53,14 @@ export default {
 
       return response;
     },
+
+    async photos(id) {
+      const url = `users/${id}/photos`;
+
+      const response = await axiosInstance.post(url);
+
+      return response;
+    },
   },
 
   tweets: {
