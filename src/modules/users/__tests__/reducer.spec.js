@@ -8,8 +8,10 @@ import followersReducer from '../reducer/followers';
 import followingsReducer from '../reducer/followings';
 import timelineReducer from '../reducer/timeline';
 import notificationsReducer from '../reducer/notifications';
+import activitiesReducer from '../reducer/activities';
 
 import notificationsModule from 'modules/notifications';
+import activitiesModule from 'modules/activities';
 
 describe('users module', () => {
   test('@INIT', () => {
@@ -84,7 +86,7 @@ describe('users module', () => {
     describe('notifications', () => {
       const NOTIFICATIONS_STATE = CURRENT_STATE.notifications;
 
-      it('should handle notificationsModule.actionTypes.ADD_NOTIFICATIONS action', () => {
+      it('should handle notifications/ADD_NOTIFICATIONS action', () => {
         const uid = '10';
         const notifications = {
           '1': { type: 'notifications', id: '1' },
@@ -117,6 +119,42 @@ describe('users module', () => {
             ...Object.keys(notifications),
             ...Object.keys(newNotifications),
           ],
+        });
+      });
+    });
+
+    describe('activities', () => {
+      const ACTIVITIES_STATE = CURRENT_STATE.activities;
+
+      it('should handle activities/ADD_ACTIVITIES action', () => {
+        const activities = {
+          '1': { type: 'activities', id: '1' },
+          '2': { type: 'activities', id: '2' },
+        };
+
+        const nextState = activitiesReducer(
+          ACTIVITIES_STATE,
+          activitiesModule.actions.addActivities(activities),
+        );
+
+        expect(nextState).toEqual({
+          ...ACTIVITIES_STATE,
+          byId: Object.keys(activities),
+        });
+
+        const newActivities = {
+          '3': { type: 'activities', id: '3' },
+          '4': { type: 'activities', id: '4' },
+        };
+
+        const newState = activitiesReducer(
+          nextState,
+          activitiesModule.actions.addActivities(newActivities),
+        );
+
+        expect(newState).toEqual({
+          ...nextState,
+          byId: [...nextState.byId, ...Object.keys(newActivities)],
         });
       });
     });

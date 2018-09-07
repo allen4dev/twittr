@@ -12,6 +12,11 @@ export const INITIAL_STATE = {
       loading: null,
       nextPage: null,
     },
+    activities: {
+      byId: [],
+      loading: null,
+      nextPage: null,
+    },
   },
   tweets: {},
   followers: {},
