@@ -9,9 +9,11 @@ import followingsReducer from '../reducer/followings';
 import timelineReducer from '../reducer/timeline';
 import notificationsReducer from '../reducer/notifications';
 import activitiesReducer from '../reducer/activities';
+import photosReducer from '../reducer/photos';
 
 import notificationsModule from 'modules/notifications';
 import activitiesModule from 'modules/activities';
+import photosModule from 'modules/photos';
 
 describe('users module', () => {
   test('@INIT', () => {
@@ -261,6 +263,49 @@ describe('users module', () => {
         ...nextState,
         [followerId]: {
           byId: [followingId, newUserFollowed],
+        },
+      });
+    });
+  });
+
+  describe('photos', () => {
+    const PHOTOS_STATE = INITIAL_STATE.photos;
+
+    it('should handle photos/ADD_PHOTOS action', () => {
+      const uid = '1';
+
+      const uid1Photos = {
+        '10': { type: 'photos', id: '10' },
+        '11': { type: 'photos', id: '11' },
+      };
+
+      const nextState = photosReducer(
+        PHOTOS_STATE,
+        photosModule.actions.addPhotos(uid, uid1Photos),
+      );
+
+      expect(nextState).toEqual({
+        ...PHOTOS_STATE,
+        [uid]: {
+          byId: Object.keys(uid1Photos),
+        },
+      });
+
+      const uid2 = '2';
+      const uid2Photos = {
+        '12': { type: 'photos', id: '12' },
+        '13': { type: 'photos', id: '13' },
+      };
+
+      const newState = photosReducer(
+        nextState,
+        photosModule.actions.addPhotos(uid2, uid2Photos),
+      );
+
+      expect(newState).toEqual({
+        ...nextState,
+        [uid2]: {
+          byId: Object.keys(uid2Photos),
         },
       });
     });

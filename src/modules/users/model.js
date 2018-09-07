@@ -21,6 +21,7 @@ export const INITIAL_STATE = {
   tweets: {},
   followers: {},
   followings: {},
+  photos: {},
 };
 
 export function addUserTweets(state, action) {
@@ -45,4 +46,13 @@ export function userFollowed(state, action) {
   const followings = state[followerId] ? state[followerId].byId : [];
 
   return [...followings, followingId];
+}
+
+export function addUserPhotos(state, action) {
+  const { id, photos } = action.payload;
+
+  const userPhotos = state[id] ? state[id].byId : [];
+  const newPhotos = Object.keys(photos);
+
+  return [...userPhotos, ...newPhotos];
 }
