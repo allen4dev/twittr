@@ -33,6 +33,15 @@ export default {
 
       return response;
     },
+
+    async activities(token) {
+      const headers = { headers: { Authorization: `Bearer ${token}` } };
+      const url = `me/activities`;
+
+      const response = await axiosInstance.get(url, headers);
+
+      return response;
+    },
   },
 
   users: {
