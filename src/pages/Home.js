@@ -1,10 +1,35 @@
 import React from 'react';
+import styled from 'styled-components';
+
+import ProfileCard from 'modules/users/components/ProfileCard';
+import Timeline from 'modules/tweets/components/Timeline';
+
+import Recommendations from 'components/containers/Recommendations';
+
+import Header from 'components/shared/Header';
+import Panel from 'components/shared/Panel';
+import RowList from 'components/shared/RowList';
+
+const Wrapper = styled.section`
+  display: grid;
+`;
+const Sidebar = styled.section``;
+const StyledTimeline = styled(Timeline)``;
+const StyledRecommendations = styled(Recommendations)``;
 
 const Home = () => {
   return (
-    <section>
-      <h1>Home</h1>
-    </section>
+    <Wrapper>
+      <Header />
+      <Sidebar>
+        <ProfileCard />
+        <Panel>
+          <RowList />
+        </Panel>
+      </Sidebar>
+      <StyledTimeline />
+      <StyledRecommendations />
+    </Wrapper>
   );
 };
 
