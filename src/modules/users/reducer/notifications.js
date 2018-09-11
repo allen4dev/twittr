@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 
 import { INITIAL_STATE } from '../model';
-import * as actionTypes from '../actionTypes';
 
 import notificationsModule from 'modules/notifications';
 
