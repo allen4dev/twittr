@@ -8,10 +8,29 @@ import Avatar from 'components/shared/Avatar';
 import Tag from 'components/shared/Tag';
 import StyledLink from 'components/shared/StyledLink';
 
-const Wrapper = styled.section``;
-const ProfileImage = styled(Photo)``;
-const Information = styled.section``;
-const UserAvatar = styled(Avatar)``;
+import banner from 'images/banner.jpg';
+
+const Wrapper = styled.section`
+  border: 4px solid red;
+  height: 20vw;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
+
+const ProfileImage = styled(Photo)`
+  height: 50%;
+  border: 2px solid darkorange;
+`;
+const Information = styled.section`
+  height: 50%;
+  border: 2px solid blue;
+  position: absolute;
+`;
+const Details = styled(UserDetails)`
+  height: 50%;
+  border: 2px solid black;
+`;
 const Heading = styled.header``;
 const Fullname = styled.h3``;
 const Edit = styled.div``;
@@ -19,9 +38,9 @@ const Edit = styled.div``;
 const Profilecard = () => {
   return (
     <Wrapper>
-      <ProfileImage />
+      <ProfileImage src={banner} />
       <Information>
-        <UserAvatar />
+        <Avatar />
         <Heading>
           <Fullname>User Fullname</Fullname>
           <Tag>@username</Tag>
@@ -31,8 +50,7 @@ const Profilecard = () => {
           <StyledLink to="edit">Edit Profile</StyledLink>
         </Edit>
       </Information>
-
-      <UserDetails />
+      <Details />
     </Wrapper>
   );
 };

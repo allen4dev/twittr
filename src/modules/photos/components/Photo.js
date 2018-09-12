@@ -3,16 +3,15 @@ import styled from 'styled-components';
 
 import Image from 'components/shared/Image';
 
-const Wrapper = styled.figure`
+const Wrapper = styled.div`
+  background-image: ${({ src }) => `url(${src})`};
+  background-size: cover;
+  background-position: center;
   width: ${({ size }) => (size ? `${size}px` : '100%')};
 `;
 
-const Photo = ({ src, size }) => {
-  return (
-    <Wrapper size={size}>
-      <Image src={src} />
-    </Wrapper>
-  );
+const Photo = ({ src, size, className }) => {
+  return <Wrapper size={size} src={src} className={className} />;
 };
 
 export default Photo;

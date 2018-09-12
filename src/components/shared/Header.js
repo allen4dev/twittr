@@ -9,7 +9,7 @@ const Wrapper = styled.header`
   background-color: ${({ theme }) => theme.colors.skyblue};
   height: ${({ theme }) => theme.sizes.header};
   display: grid;
-  grid-template-columns: 3fr 6fr 3fr;
+  grid-template-columns: 20vw 60vw 20vw;
   align-items: center;
   position: fixed;
   top: 0;

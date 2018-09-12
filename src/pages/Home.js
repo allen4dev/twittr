@@ -11,32 +11,44 @@ import Panel from 'components/shared/Panel';
 import RowList from 'components/shared/RowList';
 
 const Wrapper = styled.section`
-  display: grid;
   margin-top: ${({ theme }) => theme.sizes.header};
-  height: ${({ theme }) => `calc(100vh - ${theme.sizes.header})`};
 `;
+
+const Content = styled.section`
+  height: ${({ theme }) => `calc(100vh - ${theme.sizes.header})`};
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 20vw 60vw 20vw;
+  grid-template-areas: 'sidebar timeline recommendations';
+`;
+
 const Sidebar = styled.section`
   background-color: #bada55;
+  grid-area: sidebar;
 `;
 const StyledTimeline = styled(Timeline)`
   background-color: hotpink;
+  grid-area: timeline;
 `;
 const StyledRecommendations = styled(Recommendations)`
   background-color: orange;
+  grid-area: recommendations;
 `;
 
 const Home = () => {
   return (
     <Wrapper>
       <Header />
-      <Sidebar>
-        <ProfileCard />
-        <Panel>
-          <RowList />
-        </Panel>
-      </Sidebar>
-      <StyledTimeline />
-      <StyledRecommendations />
+      <Content>
+        <Sidebar>
+          <ProfileCard />
+          <Panel>
+            <RowList />
+          </Panel>
+        </Sidebar>
+        <StyledTimeline />
+        <StyledRecommendations />
+      </Content>
     </Wrapper>
   );
 };
