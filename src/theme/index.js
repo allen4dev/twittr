@@ -4,9 +4,13 @@ import { injectGlobal } from 'styled-components';
 injectGlobal`
   ${styledNormalize}
 
-  * {
+  *, *::before, &::after {
     box-sizing: border-box;
   }
+
+  html {
+    font-family: Arial;
+  } 
 
   body, h1, h2, h3, h4, ul, p, figure {
     margin: 0;
@@ -29,6 +33,6 @@ const sizes = {
 };
 
 export default {
-  ...colors,
-  ...sizes,
+  colors,
+  sizes,
 };

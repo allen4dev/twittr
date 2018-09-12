@@ -12,6 +12,8 @@ import RowList from 'components/shared/RowList';
 
 const Wrapper = styled.section`
   display: grid;
+  margin-top: ${({ theme }) => theme.sizes.header};
+  height: ${({ theme }) => `calc(100vh - ${theme.sizes.header})`};
 `;
 const Sidebar = styled.section`
   background-color: #bada55;
