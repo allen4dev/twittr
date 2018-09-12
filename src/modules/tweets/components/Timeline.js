@@ -1,10 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const Timeline = () => {
+const Wrapper = styled.section``;
+
+const Timeline = ({ className }) => {
   return (
-    <section className="Timeline">
+    <Wrapper className={className}>
       <h1>Timeline</h1>
-    </section>
+    </Wrapper>
   );
 };
 

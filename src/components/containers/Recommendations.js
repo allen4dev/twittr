@@ -1,10 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const Recommendations = () => {
+const Wrapper = styled.section``;
+
+const Recommendations = ({ className }) => {
   return (
-    <section className="Recommendations">
+    <Wrapper className={className}>
       <h1>Recommendations</h1>
-    </section>
+    </Wrapper>
   );
 };
 

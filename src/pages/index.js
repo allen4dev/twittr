@@ -9,14 +9,12 @@ import Error404 from './Error404';
 
 const Pages = () => {
   return (
-    <div>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/signup" component={Signup} />
-        <Route component={Error404} />
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="/profile" component={Profile} />
+      <Route path="/signup" component={Signup} />
+      <Route component={Error404} />
+    </Switch>
   );
 };
 

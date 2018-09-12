@@ -13,9 +13,15 @@ import RowList from 'components/shared/RowList';
 const Wrapper = styled.section`
   display: grid;
 `;
-const Sidebar = styled.section``;
-const StyledTimeline = styled(Timeline)``;
-const StyledRecommendations = styled(Recommendations)``;
+const Sidebar = styled.section`
+  background-color: #bada55;
+`;
+const StyledTimeline = styled(Timeline)`
+  background-color: hotpink;
+`;
+const StyledRecommendations = styled(Recommendations)`
+  background-color: orange;
+`;
 
 const Home = () => {
   return (
