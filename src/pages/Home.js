@@ -42,7 +42,7 @@ const Home = () => {
       <Content>
         <Sidebar>
           <ProfileCard />
-          <Panel>
+          <Panel title="Notifications">
             <RowList />
           </Panel>
         </Sidebar>

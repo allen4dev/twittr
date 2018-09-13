@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Image from 'components/shared/Image';
-
 const Wrapper = styled.div`
   background-image: ${({ src }) => `url(${src})`};
   background-size: cover;

@@ -21,7 +21,7 @@ const Count = styled.span`
 const Name = styled.span`
   color: gray;
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
 `;
 
