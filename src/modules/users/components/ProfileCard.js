@@ -9,46 +9,70 @@ import Tag from 'components/shared/Tag';
 import StyledLink from 'components/shared/StyledLink';
 
 import banner from 'images/banner.jpg';
+import avatar from 'images/avatar.jpg';
 
 const Wrapper = styled.section`
-  border: 4px solid red;
   height: 20vw;
+  position: relative;
   display: flex;
   flex-direction: column;
-  position: relative;
 `;
 
 const ProfileImage = styled(Photo)`
   height: 50%;
-  border: 2px solid darkorange;
 `;
+
 const Information = styled.section`
   height: 50%;
-  border: 2px solid blue;
   position: absolute;
+  top: 25%;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas:
+    'avatar heading'
+    'avatar edit';
 `;
+
+const UserAvatar = styled(Avatar)`
+  grid-area: avatar;
+  align-self: center;
+`;
+
+const Section = styled.header`
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+`;
+
+const Fullname = styled.h3`
+  color: white;
+  font-weight: normal;
+`;
+
 const Details = styled(UserDetails)`
   height: 50%;
-  border: 2px solid black;
 `;
-const Heading = styled.header``;
-const Fullname = styled.h3``;
-const Edit = styled.div``;
 
 const Profilecard = () => {
   return (
     <Wrapper>
       <ProfileImage src={banner} />
       <Information>
-        <Avatar />
-        <Heading>
+        <UserAvatar src={avatar} />
+        <Section>
           <Fullname>User Fullname</Fullname>
           <Tag>@username</Tag>
-        </Heading>
-        <Edit>
-          <Tag>User Location</Tag>
-          <StyledLink to="edit">Edit Profile</StyledLink>
-        </Edit>
+        </Section>
+        <Section>
+          <Tag color="black">User Location</Tag>
+          <StyledLink to="edit" color="gray">
+            Edit Profile
+          </StyledLink>
+        </Section>
       </Information>
       <Details />
     </Wrapper>
