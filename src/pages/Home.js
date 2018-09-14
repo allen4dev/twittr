@@ -1,14 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ProfileCard from 'modules/users/components/ProfileCard';
 import Timeline from 'modules/tweets/components/Timeline';
 
-import Recommendations from 'components/containers/Recommendations';
+import Sidebar from 'components/containers/Sidebar';
 
+import Recommendations from 'components/containers/Recommendations';
 import Header from 'components/shared/Header';
-import Panel from 'components/shared/Panel';
-import RowList from 'components/shared/RowList';
 
 const Wrapper = styled.section`
   margin-top: ${({ theme }) => theme.sizes.header};
@@ -22,10 +20,6 @@ const Content = styled.section`
   grid-template-areas: 'sidebar timeline recommendations';
 `;
 
-const Sidebar = styled.section`
-  background-color: #bada55;
-  grid-area: sidebar;
-`;
 const StyledTimeline = styled(Timeline)`
   background-color: hotpink;
   grid-area: timeline;
@@ -40,12 +34,7 @@ const Home = () => {
     <Wrapper>
       <Header />
       <Content>
-        <Sidebar>
-          <ProfileCard />
-          <Panel title="Notifications">
-            <RowList />
-          </Panel>
-        </Sidebar>
+        <Sidebar />
         <StyledTimeline />
         <StyledRecommendations />
       </Content>

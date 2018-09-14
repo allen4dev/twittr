@@ -1,7 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const RowList = () => {
-  return <h1>RowList</h1>;
+const Wrapper = styled.ul``;
+
+const RowList = ({ listIds, children }) => {
+  return <Wrapper>{listIds.map(id => children(id))}</Wrapper>;
 };
 
 export default RowList;
