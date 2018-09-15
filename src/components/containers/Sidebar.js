@@ -14,15 +14,20 @@ const Wrapper = styled.section`
 
 const ids = ['1', '2', '3', '4'];
 
+function renderNotification(id) {
+  return <Notification key={id} id={id} />;
+}
+
+function renderList(ids) {
+  return <RowList listIds={ids}>{id => renderNotification(id)}</RowList>;
+}
+
 const Sidebar = () => {
   return (
     <Wrapper>
       <ProfileCard />
-      <Panel title="Notifications">
-        <RowList listIds={ids}>
-          {id => <Notification key={id} id={id} />}
-        </RowList>
-      </Panel>
+      <Panel title="Notifications" />
+      {renderList(ids)}
     </Wrapper>
   );
 };

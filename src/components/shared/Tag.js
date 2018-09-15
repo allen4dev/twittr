@@ -6,11 +6,17 @@ const Wrapper = styled.span`
   color: ${({ color }) => (color ? color : 'white')};
   font-weight: ${({ emphasize }) => emphasize && 'bold'};
   font-style: ${({ emphasize }) => emphasize && 'italic'};
+  font-size: ${({ fsize }) => fsize && fsize};
 `;
 
-const Tag = ({ color, bgColor, children, emphasize }) => {
+const Tag = ({ color, bgColor, children, emphasize, fsize, className }) => {
   return (
-    <Wrapper color={color} bgColor={bgColor} emphasize={emphasize}>
+    <Wrapper
+      fsize={fsize}
+      color={color}
+      bgColor={bgColor}
+      emphasize={emphasize}
+      className={className}>
       {children}
     </Wrapper>
   );
