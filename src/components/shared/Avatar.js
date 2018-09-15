@@ -1,18 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// import Photo from 'modules/photos/components/Photo';
 import Image from 'components/shared/Image';
-
-// const Avatar = styled(Photo)`
-//   border-radius: 50%;
-//   border: 2px solid white;
-// `;
 
 const Wrapper = styled.figure`
   border-radius: 50%;
   border: 2px solid white;
   overflow: hidden;
+  max-width: 75px;
+  min-width: 48px;
   width: ${({ width }) => (width ? width : '100%')};
 `;
 
